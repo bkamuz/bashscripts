@@ -9,20 +9,20 @@ if [[ "$UID" -ne 0 ]]; then
 fi
 
 ### Config options
-target="/dev/vda"
+target="/dev/nvme0n1"
 rootmnt="/mnt"
 locale="en_GB.UTF-8"
-keymap="uk"
-timezone="Europe/London"
-hostname="arch-test"
-username="walian"
+keymap="us"
+timezone="Europe/Moscow"
+hostname="acid"
+username="crypt"
 #SHA512 hash of password. To generate, run 'mkpasswd -m sha-512', don't forget to prefix any $ symbols with \ . The entry below is the hash of 'password'
-user_password="\$6\$/VBa6GuBiFiBmi6Q\$yNALrCViVtDDNjyGBsDG7IbnNR0Y/Tda5Uz8ToyxXXpw86XuCVAlhXlIvzy1M8O.DWFB6TRCia0hMuAJiXOZy/"
+user_password="\$6\$DMOOWyz4YLQfkvtS\$g80cPBlt258o8EehJiC6j..fv8y9X8wo4.qohqdZyp.PH01GdNMdvMaV1Z9CUEScLy7kawNj3VaPvLdZYhbpp1"
 
 #To fully automate the setup, change badidea=no to yes, and enter a cleartext password for the disk encryption 
 
 badidea="no"
-crypt_password="changeme"
+crypt_password="********"
 
 
 ### Packages to pacstrap ##
@@ -59,7 +59,7 @@ guipacs=(
 echo "Creating partitions..."
 sgdisk -Z "$target"
 sgdisk \
-    -n1:0:+512M  -t1:ef00 -c1:EFISYSTEM \
+    -n1:0:+1024M  -t1:ef00 -c1:EFISYSTEM \
     -N2          -t2:8304 -c2:linux \
     "$target"
 # Reload partition table
